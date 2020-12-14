@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="se">
+<!--*** Student assignment by Cristina Löqvist Mid Sweden University Sep 2020 ***-->
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="./sassy/styles.css" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Alice&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="./js/admin.js"></script>
+    <title>DT173G_project_frontend</title>
+</head>
+
+<body data-ng-app="myApp">
+    <header>
+        <div id="frontHeader">
+            <h3>Cristina Elin Löfqvist</h3>
+            <h1>Webb developer student</h1>
+        </div>
+    </header>
+    <main id="frontEndMain">
+        <div id="mainHeader">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">Home</a></li>
+            </ul>
+            <div id=portfolioSpan>
+                <a href="#mainHeaderPortfolio" class="portfolioPlate">Portfolio</a>
+            </div>
+
+            <div id=base>
+                <img src="./images/frontendLarge.png" alt="illustration" id=Scetch>
+                <div id="typewriter">
+                    <img src="./images/luca-onniboni-4v9Kk01mEbY-large.png" alt="typemwriter" id="typewriterImg">
+                    <div class="educationPlate">
+                        <a href="#mainHeaderCourses" id="educationLink">Education</a>
+                    </div>
+                    <!--end of typewriter div-->
+                </div>
+            </div>
+        </div>
+        <div id="mainMain">
+
+            <div id=illustrationSpan>
+                <a href="#mainMainIllustration" class="illustrationPlate">Illustrations</a>
+            </div>
+            <div class="backgroundimg">
+                <div id="skillsAbout">
+                    <div id="skills">
+                        <p>Skills</p>
+                        <div>
+                            <h1>UI/UX Design</h1>
+                            <h1>Front End</h1>
+                            <h1>Back End</h1>
+                        </div>
+                    </div>
+                    <div id="about">
+                        <p>
+                            I am an easy to work with, devoted developer with passion to learn and a great service mind.
+                            You are welcome to scroll and check out my recent work and studies.
+                        </p>
+                        <div id="more">
+                            <span id="verticalLine"></span>
+                            <h1>More</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<img src="./images/IMG_5082large.png" alt="" width=auto height=auto>-->
+        <div id="mainFooter" class="blackBottom">
+            <div id="aboutDiv">
+                <img src="./images/Portrait.png" alt="portrait" id="portrait">
+                <h1>About</h1>
+                <ul>
+                    <li>Studies in webbdevelopment</li>
+                    <li>Bachelorsdegree in International Relations</li>
+                    <li>Experienced investigator in international law within social security</li>
+                </ul>
+            </div>
+            <div id="contactDiv">
+                <div class="picoverpic">
+                    <img src="./images/Asset-28.png" alt="illustration of contactlink" class="contactBottom" />
+                    <img src="./images/Asset-33.png" alt="illustration of contactlink"
+                        class="contactTop transitionimg" />
+                </div>
+                <p id="white">
+                    If you are interested in my work or want to hear more about what I can offer, please
+                    contact me at
+                    email: crlo1900@student.miun.se or telephone: +46 70 4744747.
+                </p>
+            </div>
+        </div>
+        <!--end of blackBottom div-->
+        <div id="mainHeaderPortfolio">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="">Portfolio</a></li>
+            </ul>
+        </div>
+        <div id="mainMainPortfolio" data-ng-controller="wpCtrl" class="container">
+            <h2 class="black">Portfolio</h2>
+            <p class=black>List of developed websites</p>
+            <div class="kurser">
+                <div class='filter'>
+                    <form>
+                        <label>Filter on:&nbsp;<input data-ng-model="filterQuery" class="form-control pull-right"
+                                placeholder="Filter..."></label>
+                    </form>
+                </div><!-- /.filter -->
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Title</td>
+                            <td>Description</td>
+                            <td>URL</td>
+                        </tr>
+                    </thead>
+                    <tr data-ng-repeat="wp in wps | filter:filterQuery | orderBy: 'title'">
+                        <td>{{ wp.title}}</td>
+                        <td>{{ wp.desc }}</td>
+                        <td><a href="{{wp.url}}"> {{wp.url }}</a></td>
+                    </tr>
+                </table>
+            </div><!-- /.kurser -->
+
+        </div>
+        <div id="mainFooterPortfolio"></div>
+        <div id="mainHeaderIllustration">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="">Illustrations</a></li>
+            </ul>
+        </div>
+        <div id="mainMainIllustration">
+            <div class="flexSpaceAround">
+                <article class="illustrationArticle" id="firstIllustrationArticle">
+                    <h3>Double exposure</h3>
+                    <div class="flexWrapperCol">
+                        <img src="./images/IMG_6634.jpg" alt="img double exposure">
+                        <div class="infoDrop">
+                            <div class="vlInfo">
+                                <span class="vl"></span>
+                                <p>info</p>
+                            </div>
+                            <p class="hide">Chamonix, Brevent</p>
+                        </div>
+                    </div>
+                </article>
+                <div class="ghost"></div>
+
+            </div>
+            <div class="flexSpaceAround">
+                <div class="ghost"></div>
+
+                <article class="illustrationArticle">
+                    <h3>Coal sketch</h3>
+                    <div class="flexWrapperCol">
+                        <img src="./images/IMG_6190.jpg" alt="Coal sketch">
+                        <div class="infoDrop">
+                            <div class="vlInfo">
+                                <span class="vl"></span>
+                                <p>info</p>
+                            </div>
+                            <p class="hide">Embrace</p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <div class="flexSpaceAround">
+                <article class="illustrationArticle" id="logo1">
+                    <h3>Logotype</h3>
+                    <div class="flexWrapperCol">
+                        <img src="./images/Logo4.png" alt="logotype">
+                        <div class="infoDrop">
+                            <div class="vlInfo">
+                                <span class="vl"></span>
+                                <p>info</p>
+                            </div>
+                            <p class="hide">Custom made</p>
+                        </div>
+                    </div>
+                </article>
+                <div class="ghost"></div>
+
+            </div>
+            <div class="flexSpaceAround">
+                <div class="ghost"></div>
+            </div>
+            <div class="flexSpaceAround">
+                <div class="ghost"></div>
+                <article class="illustrationArticle">
+                    <h3>Photograph</h3>
+                    <div class="flexWrapperCol">
+                        <img src="./images/IMG_3048.png" alt="photography of sakura flower">
+                        <div class="infoDrop">
+                            <div class="vlInfo">
+                                <span class="vl"></span>
+                                <p>info</p>
+                            </div>
+                            <p class="hide">Sakura in May</p>
+                        </div>
+                    </div>
+                </article>
+
+
+            </div>
+
+        </div>
+        <div id="mainFooterIllustration">
+
+        </div>
+        <div id="mainHeaderCourses">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="">Courses</a></li>
+            </ul>
+        </div>
+        <div id="mainMainCourses">
+            <!--<span id="brown">
+                <img class="leafimg" src="./images/Asset_30.png">
+            </span>-->
+            <div class="kurser container" data-ng-controller="kurserCtrl">
+                <h2 class="black">Finished courses</h2>
+                <div class='filter'>
+                    <form>
+                        <label>Filter on:&nbsp;<input data-ng-model="filterQuery" class="form-control pull-right"
+                                placeholder="Filter..."></label>
+                    </form>
+                </div><!-- /.filter -->
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Start date</td>
+                            <td>University</td>
+                            <td>Course</td>
+                            <td>End date</td>
+                        </tr>
+                    </thead>
+                    <tr data-ng-repeat="kurs in kurser | filter:filterQuery | orderBy: 'start_date'">
+                        <td>{{ kurs.start_date}}</td>
+                        <td>{{ kurs.university }}</td>
+                        <td>{{ kurs.course_name }}</td>
+                        <td>{{ kurs.end_date}}</td>
+                    </tr>
+                </table>
+            </div><!-- /.kurser -->
+        </div>
+        <!--end of manmainCourses-->
+        <div id="mainHeaderXp">
+            <ul class="breadcrumb">
+                <li><a href="./index.html">Home</a></li>
+                <li><a href="">Experience</a></li>
+            </ul>
+        </div>
+        <div id="mainMainXp" data-ng-controller="xpCtrl" class="container">
+            <div class="kurser">
+                <h2 class="black">Experience</h2>
+                <div class='filter'>
+                    <form>
+                        <label>Filter on:&nbsp;<input data-ng-model="filterQuery" class="form-control pull-right"
+                                placeholder="Filter..."></label>
+                    </form>
+                </div><!-- /.filter -->
+                <table>
+                    <thead>
+                        <tr>
+                            <td>Start date</td>
+                            <td>Company</td>
+                            <td>Position</td>
+                            <td>End date</td>
+                        </tr>
+                    </thead>
+                    <tr data-ng-repeat="xp in xps | filter:filterQuery | orderBy: 'start_date'">
+                        <td>{{ xp.start_date}}</td>
+                        <td>{{ xp.workplace }}</td>
+                        <td>{{ xp.position }}</td>
+                        <td>{{ xp.end_date}}</td>
+                    </tr>
+                </table>
+            </div><!-- /.kurser -->
+        </div>
+
+        <div id="mainFooterCourses">
+
+        </div>
+    </main>
+    <footer id="fronEndFooter">
+        <a href="https://www.facebook.com/"><img class="socialmediaicon"
+                src="./images/iconfinder_1_Facebook2_colored_svg_5296500.png" alt="icon of facebooklogo"></a>
+        <a href="https://www.linkedin.com/feed/"><img class="socialmediaicon"
+                src="./images/iconfinder_1_Linkedin_unofficial_colored_svg_5296501.png" alt="icon of linkedin"></a>
+        <a href="https://www.pinterest.se"><img class="socialmediaicon"
+                src="./images/iconfinder_1_Pinterest_colored_svg_5296503.png" alt="icon of pinterest"></a>
+        <a href="https://twitter.com/"><img class="socialmediaicon"
+                src="./images/iconfinder_1_Twitter3_colored_svg_5296516.png" alt="icon of twitter"></a>
+    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+    <script>
+        var app1 = angular.module('myApp', []);
+        /* Controller för att läsa ut information/kurser */
+        app1.controller('kurserCtrl', function ($scope, $http) {
+            $http.get("/DT173G_project/API/rest_courses.php")
+                .success(function (response) {
+                    //$scope.information = response.information;
+                    $scope.kurser = response;
+                });
+        });
+        /* Controller för att läsa ut information/kurser */
+        app1.controller('xpCtrl', function ($scope, $http) {
+            $http.get("/DT173G_project/API/rest_xp.php")
+                .success(function (response) {
+                    //$scope.information = response.information;
+                    $scope.xps = response;
+                });
+        });
+        /* Controller för att läsa ut information/kurser */
+        app1.controller('wpCtrl', function ($scope, $http) {
+            $http.get("/DT173G_project/API/rest_wp.php")
+                .success(function (response) {
+                    //$scope.information = response.information;
+                    $scope.wps = response;
+                });
+        });
+    </script>
+</body>
+
+</html>
