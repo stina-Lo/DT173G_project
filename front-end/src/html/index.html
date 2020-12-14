@@ -301,7 +301,7 @@
         var app1 = angular.module('myApp', []);
         /* Controller för att läsa ut information/kurser */
         app1.controller('kurserCtrl', function ($scope, $http) {
-            $http.get("/DT173G_project/API/rest_courses.php")
+            $http.get("https://willbur.nu/DT173G_PROJECT/API/rest_courses.php")
                 .success(function (response) {
                     //$scope.information = response.information;
                     $scope.kurser = response;
@@ -309,7 +309,7 @@
         });
         /* Controller för att läsa ut information/kurser */
         app1.controller('xpCtrl', function ($scope, $http) {
-            $http.get("/DT173G_project/API/rest_xp.php")
+            $http.get("https://willbur.nu/DT173G_PROJECT/API/rest_xp.php")
                 .success(function (response) {
                     //$scope.information = response.information;
                     $scope.xps = response;
@@ -317,7 +317,7 @@
         });
         /* Controller för att läsa ut information/kurser */
         app1.controller('wpCtrl', function ($scope, $http) {
-            $http.get("/DT173G_project/API/rest_wp.php")
+            $http.get("https://willbur.nu/DT173G_PROJECT/API/rest_wp.php")
                 .success(function (response) {
                     //$scope.information = response.information;
                     $scope.wps = response;
