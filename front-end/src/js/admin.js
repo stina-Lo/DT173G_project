@@ -1,5 +1,6 @@
 /*Function to show login form*/
 const showLogin = () => {
+
     const mainEl = document.getElementById("adminMain");
     mainEl.innerHTML = "";
     mainEl.innerHTML = '<form id="adminPass"  onSubmit = "login()">' +
@@ -31,7 +32,7 @@ const deleteCourse = (uni, name) => {
     })
         .then(response => {
             response.json()
-            location.reload
+            location.reload()
         })
 
         .then(data => {
@@ -39,10 +40,10 @@ const deleteCourse = (uni, name) => {
             location.reload();
 
 
+        }).catch(()=>{
+            location.reload();
         })
-        .catch(error => {
-            console.log('Error: ', error);
-        })
+
 }
 
 /**
@@ -72,10 +73,10 @@ const deleteXp = (workplace, position) => {
         })
         .then(data => {
             location.reload();
+        }).catch(()=>{
+            location.reload();
         })
-        .catch(error => {
-            console.log('Error: ', error);
-        })
+
 
 }
 /**
@@ -99,16 +100,13 @@ const deleteWp = (title, url) => {
             "Content-type": "application/json; charset=UTF-8"
         }
     })
-        .then(response => {
-            response.json()
-            location.reload
-        })
+        .then(response => response.json())
         .then(data => {
             location.reload();
+        }).catch(()=>{
+            location.reload();
         })
-        .catch(error => {
-            console.log('Error: ', error);
-        })
+
 
 }
 /**
@@ -136,12 +134,11 @@ const updateXp = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
-            //getCourses();
+            location.reload();
+        }).catch(()=>{
+            location.reload();
         })
-        .catch(error => {
-            console.log('Error: ', error);
-        })
+
 
 }
 /**
@@ -168,12 +165,10 @@ const updateWp = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             //getCourses();
             location.reload();
-        })
-        .catch(error => {
-            console.log('Error: ', error);
+        }).catch(()=>{
+            location.reload();
         })
 
 }
@@ -200,13 +195,12 @@ const addXp = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             //getCourses();
             location.reload();
+        }).catch(()=>{
+            location.reload();
         })
-        .catch(error => {
-            console.log('Error: ', error);
-        })
+
 
 }
 /**
@@ -231,12 +225,10 @@ const addWp = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             //getCourses();
             location.reload();
-        })
-        .catch(error => {
-            console.log('Error: ', error);
+        }).catch(()=>{
+            location.reload();
         })
 
 }
@@ -265,12 +257,10 @@ const updateCourse = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             //getCourses();
             location.reload();
-        })
-        .catch(error => {
-            console.log('Error: ', error);
+        }).catch(()=>{
+            location.reload();
         })
 
 }
@@ -297,12 +287,10 @@ const addCourse = () => {
     })
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             //getCourses();
             location.reload();
-        })
-        .catch(error => {
-            console.log('Error: ', error);
+        }).catch(()=>{
+            location.reload();
         })
 
 }
@@ -318,7 +306,6 @@ const getWp = () => {
     fetch('https://willbur.nu/DT173G_PROJECT/API/rest_wp.php') /*make fetch*/
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.message === "No webpages found") { //check if this is correct
                 return
             }
@@ -353,7 +340,6 @@ const getXp = () => {
     fetch('https://willbur.nu/DT173G_PROJECT/API/rest_xp.php') /*make fetch*/
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.message === "No experience found") { //check if this is correct
                 return
             }
@@ -388,7 +374,6 @@ const getCourses = () => {
     fetch('https://willbur.nu/DT173G_PROJECT/API/rest_courses.php') /*make fetch*/
         .then(response => response.json())
         .then(data => {
-            console.log(data)
             if (data.message === "No courses found") {
                 return
             }
@@ -411,7 +396,11 @@ const getCourses = () => {
     headerEl.appendChild(coursesEl)
 
 }
-
+const logout = () => {
+    console.log("her")
+    localStorage.setItem('loggedon', false);
+    location.reload()
+}
 /**
  * Function to render admin form if user is authorixed
  * makes fetch call to rest_authoruzed.php
@@ -422,104 +411,94 @@ const showAdmin = () => {
     getCourses();
     getWp();
     getXp();
-    const data = {
-        email: "cristina.lofqvist@gmail.com"
-    }
-    fetch('https://willbur.nu/DT173G_PROJECT/API/rest_authorized.php', {
-        method: 'POST',
-        body: JSON.stringify(data),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    }) /*make fetch*/
-        .then(response => {
-            if (!response.ok) {
-                showLogin();
-            } else {
-                const mainEl = document.getElementById("adminMain");
-                mainEl.innerHTML = "";
-                mainEl.innerHTML = '<form id="courseAdd" >' +
-                    '<label for="kursname">Kursnamn:</label>' +
-                    '<input type="text" name="kursnamn" id="kursnamn">' +
-                    '<label for="university">Universitet:</label>' +
-                    '<input type="text" name="university" id="uni">' +
-                    '<label for="start_date">Startdatum:</label>' +
-                    '<input type="date" name="start_date" id="sdate">' +
-                    '<label for="end_date">Slutdatum:</label>' +
-                    '<input type="date" name="end_date" id="edate">' +
-                    '<button onclick = "addCourse()">Lägg till kurs</button>' +
-                    '</form>' + "<hr/>" +
-                    '<form id="xpAdd"  >' +
-                    '<label for="workplace">Workplace:</label>' +
-                    '<input type="text" name="workplace" id="workplace">' +
-                    '<label for="title">Title:</label>' +
-                    '<input type="text" name="title" id="title">' +
-                    '<label for="start_date">Startdatum:</label>' +
-                    '<input type="date" name="start_date" id="sdate">' +
-                    '<label for="end_date">Slutdatum:</label>' +
-                    '<input type="date" name="end_date" id="edate">' +
-                    '<button onclick = "addXp()">Lägg till erfarenhet</button>' +
-                    '</form>' + "<hr/>" +
-                    '<form  id="wpAdd"  >' +
-                    '<label for="title">Title:</label>' +
-                    '<input type="text" name="title" id="wpTitle">' +
-                    '<label for="url">Url:</label>' +
-                    '<input type="url" name="url" id="url">' +
-                    '<label for="desc">Description:</label>' +
-                    '<input type="text" name="desc" id="desc">' +
-                    '<button onclick = "addWp()">Lägg till webpage</button>' +
-                    '</form>' + "<hr/>" +
-                    '<form  id="courseupdate"  >' +
-                    '<label for="kursname">Kursnamn:</label>' +
-                    '<input type="text" name="kursnamn" id="kursnamn">' +
-                    '<label for="university">Universitet:</label>' +
-                    '<input type="text" name="university" id="uni">' +
-                    '<label for="kursname">nytt Kursnamn:</label>' +
-                    '<input type="text" name="kursnamn" id="kursnamn">' +
-                    '<label for="university">nytt Universitet:</label>' +
-                    '<input type="text" name="university" id="uni">' +
-                    '<label for="start_date">nytt Startdatum:</label>' +
-                    '<input type="date" name="start_date" id="sdate">' +
-                    '<label for="end_date">nytt Slutdatum:</label>' +
-                    '<input type="date" name="end_date" id="edate">' +
-                    '<button onclick = "updateCourse()">Updatera</button>' +
-                    '</form>' + "<hr/>" +
-                    '<form  id="xpupdate"  >' +
-                    '<label for="workplace">Workplace:</label>' +
-                    '<input type="text" name="workplace" id="workplace">' +
-                    '<label for="title">Title:</label>' +
-                    '<input type="text" name="title" id="title">' +
-                    '<label for="workplace">Ny Workplace:</label>' +
-                    '<input type="text" name="workplace" id="workplace">' +
-                    '<label for="title">Ny Title:</label>' +
-                    '<input type="text" name="title" id="title">' +
-                    '<label for="start_date">nytt Startdatum:</label>' +
-                    '<input type="date" name="start_date" id="sdate">' +
-                    '<label for="end_date">nytt Slutdatum:</label>' +
-                    '<input type="date" name="end_date" id="edate">' +
-                    '<button onclick = "updateXp()">Updatera</button>' +
-                    '</form>' + "<hr/>" +
-                    '<form  id="wpupdate"  >' +
-                    '<label for="title">Title:</label>' +
-                    '<input type="text" name="title" id="wpTitle">' +
-                    '<label for="url">Url:</label>' +
-                    '<input type="url" name="url" id="url">' +
-                    '<label for="title">ny Title:</label>' +
-                    '<input type="text" name="title" id="wpTitle">' +
-                    '<label for="url">ny Url:</label>' +
-                    '<input type="url" name="url" id="url">' +
-                    '<label for="desc">ny Description:</label>' +
-                    '<input type="text" name="desc" id="desc">' +
-                    '<button onclick = "updateWp()">updatera</button>' +
-                    '</form>'
-            }
-        }).then((data) => {
-        })
-        .catch(error => {
-            console.error('There has been a problem with your fetch operation:', error);
-        });
+    const mainEl = document.getElementById("adminMain");
+    mainEl.innerHTML = "";
+    mainEl.innerHTML = '<form id="courseAdd" >' +
+        '<label for="kursname">Kursnamn:</label>' +
+        '<input type="text" name="kursnamn" id="kursnamn">' +
+        '<label for="university">Universitet:</label>' +
+        '<input type="text" name="university" id="uni">' +
+        '<label for="start_date">Startdatum:</label>' +
+        '<input type="date" name="start_date" id="sdate">' +
+        '<label for="end_date">Slutdatum:</label>' +
+        '<input type="date" name="end_date" id="edate">' +
+        '<button onclick = "addCourse()">Lägg till kurs</button>' +
+        '</form>' + "<hr/>" +
+        '<form id="xpAdd"  >' +
+        '<label for="workplace">Workplace:</label>' +
+        '<input type="text" name="workplace" id="workplace">' +
+        '<label for="title">Title:</label>' +
+        '<input type="text" name="title" id="title">' +
+        '<label for="start_date">Startdatum:</label>' +
+        '<input type="date" name="start_date" id="sdate">' +
+        '<label for="end_date">Slutdatum:</label>' +
+        '<input type="date" name="end_date" id="edate">' +
+        '<button onclick = "addXp()">Lägg till erfarenhet</button>' +
+        '</form>' + "<hr/>" +
+        '<form  id="wpAdd"  >' +
+        '<label for="title">Title:</label>' +
+        '<input type="text" name="title" id="wpTitle">' +
+        '<label for="url">Url:</label>' +
+        '<input type="url" name="url" id="url">' +
+        '<label for="desc">Description:</label>' +
+        '<input type="text" name="desc" id="desc">' +
+        '<button onclick = "addWp()">Lägg till webpage</button>' +
+        '</form>' + "<hr/>" +
+        '<form  id="courseupdate"  >' +
+        '<label for="kursname">Kursnamn:</label>' +
+        '<input type="text" name="kursnamn" id="kursnamn">' +
+        '<label for="university">Universitet:</label>' +
+        '<input type="text" name="university" id="uni">' +
+        '<label for="kursname">nytt Kursnamn:</label>' +
+        '<input type="text" name="kursnamn" id="kursnamn">' +
+        '<label for="university">nytt Universitet:</label>' +
+        '<input type="text" name="university" id="uni">' +
+        '<label for="start_date">nytt Startdatum:</label>' +
+        '<input type="date" name="start_date" id="sdate">' +
+        '<label for="end_date">nytt Slutdatum:</label>' +
+        '<input type="date" name="end_date" id="edate">' +
+        '<button onclick = "updateCourse()">Updatera</button>' +
+        '</form>' + "<hr/>" +
+        '<form  id="xpupdate"  >' +
+        '<label for="workplace">Workplace:</label>' +
+        '<input type="text" name="workplace" id="workplace">' +
+        '<label for="title">Title:</label>' +
+        '<input type="text" name="title" id="title">' +
+        '<label for="workplace">Ny Workplace:</label>' +
+        '<input type="text" name="workplace" id="workplace">' +
+        '<label for="title">Ny Title:</label>' +
+        '<input type="text" name="title" id="title">' +
+        '<label for="start_date">nytt Startdatum:</label>' +
+        '<input type="date" name="start_date" id="sdate">' +
+        '<label for="end_date">nytt Slutdatum:</label>' +
+        '<input type="date" name="end_date" id="edate">' +
+        '<button onclick = "updateXp()">Updatera</button>' +
+        '</form>' + "<hr/>" +
+        '<form  id="wpupdate"  >' +
+        '<label for="title">Title:</label>' +
+        '<input type="text" name="title" id="wpTitle">' +
+        '<label for="url">Url:</label>' +
+        '<input type="url" name="url" id="url">' +
+        '<label for="title">ny Title:</label>' +
+        '<input type="text" name="title" id="wpTitle">' +
+        '<label for="url">ny Url:</label>' +
+        '<input type="url" name="url" id="url">' +
+        '<label for="desc">ny Description:</label>' +
+        '<input type="text" name="desc" id="desc">' +
+        '<button onclick = "updateWp()">updatera</button>' +
+        '</form>' +
+        '<button onclick = "logout()">logout</button>'
+
 }
 
+const adminPage = () => {
+    const loggedon = localStorage.getItem('loggedon');
+    if (loggedon === "true") {
+        showAdmin()
+    } else {
+        showLogin()
+    }
+}
 /**
  * Function to preform a login of user
  * calls fetch with url rest_login.php
@@ -543,17 +522,16 @@ const login = () => {
             .then(response => {
                 if (!response.ok) {
                     showLogin();
+                    localStorage.setItem('loggedon', false);
                 }
                 return response.json();
             })
             .then(data => {
                 if (data.message === "Login ok") {
+                    localStorage.setItem('loggedon', true);
                     showAdmin();
                 }
             })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-            });
     }
 }
 
