@@ -1,4 +1,4 @@
-const { src, dest, watch, series, parallel} = require("gulp");
+const { src, dest, watch, series, parallel } = require("gulp");
 const concat = require("gulp-concat");
 const uglify = require("gulp-uglify-es").default;
 const csso = require('gulp-csso');
@@ -6,22 +6,23 @@ const sourcemaps = require('gulp-sourcemaps');
 const livereload = require('gulp-livereload');
 const sass = require('gulp-sass');
 const babel = require('gulp-babel');
+const browserify = require('gulp-browserify');
 
 sass.compiler = require('node-sass');
 
 /*Search path*/
 const files = {
     htmlPath: "src/html/*.html",
-    cssPath: "src/sassy/*.css",
+    cssPath: "src/css/*.css",
     jsPath: "src/js/*.js",
     imgPath: "src/images/*",
     sassPath: "src/sassy/*.scss"
 }
 
 function es6Task() {
-    return src(files.jsPath).pipe(babel({presets: ['@babel/env']})).pipe(dest('src/js'))
+    return src(files.jsPath).pipe(babel({ presets: ['@babel/env'] })).pipe(dest('src/js'))
 }
- 
+
 function sourcemapsJsTask() {
     return src(files.jsPath).pipe(sourcemaps.init()).pipe(sourcemaps.write()).pipe(dest('dist'));
 }
@@ -48,7 +49,8 @@ function copyHTML() {
 
 /*concatinate and minify js files*/
 function jsTask() {
-    return src(files.jsPath).pipe(babel({presets: ['@babel/env']})).pipe(concat('main.js')).pipe(uglify()).pipe(dest('../public/js')).pipe(livereload());
+    return src(files.jsPath).pipe(babel({ presets: ['@babel/env'], "plugins": [
+        '@babel/plugin-transform-runtime'] })).pipe(concat('main.js'))./*pipe(uglify()).*/pipe(dest('../public/js')).pipe(livereload());
 }
 
 /*Sammanslår alla css filer under css path till filen pub/css/styles.css*/

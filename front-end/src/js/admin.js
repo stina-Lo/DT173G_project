@@ -503,7 +503,7 @@ const adminPage = () => {
  * Function to preform a login of user
  * calls fetch with url rest_login.php
  */
-const login = () => {
+const  login = () => {
     const x = document.getElementById("adminPass");
     const password = x.elements[0].value
 
@@ -512,12 +512,12 @@ const login = () => {
             email: "cristina.lofqvist@gmail.com",
             password: password
         }
-        fetch('https://willbur.nu/DT173G_PROJECT/API/rest_login.php', {
+       fetch('https://willbur.nu/DT173G_PROJECT/API/rest_login.php', {
             method: 'POST',
             body: JSON.stringify(data),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
-            }
+            }, keepalive: true
         }) /*make fetch*/
             .then(response => {
                 if (!response.ok) {
